@@ -1,0 +1,36 @@
+﻿@model Jimmy_Purnell_Development.Models.Blog
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">@Html.DisplayFor(model => model.Title)</h1>
+
+<div class="container">
+    <hr />
+
+    <h4 class="text-center">By: @Html.DisplayFor(model => model.Author)</h4>
+    <h6 class="text-center">Created At: @Html.DisplayFor(model => model.CreatedAt)</h6>
+    <h6 class="text-center">Modified At: @Html.DisplayFor(model => model.ModifiedAt)</h6>
+    <hr />
+    <p>@Html.DisplayFor(model => model.Post)</p>
+    @foreach (var item in Model.BlogComments)
+            {
+
+            }
+
+    @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+    {
+
+        <span><a asp-action="Edit" asp-route-id="@Model.Id" class="btn-outline-danger btn">Edit</a></span>
+
+    }
+
+    <partial name="_BlogComments"></partial>
+
+
+
+    <a asp-action="Index" class="text-right btn btn-outline-warning">Back to List</a>
+
+</div>

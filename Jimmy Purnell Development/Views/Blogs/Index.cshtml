@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Jimmy_Purnell_Development.Models.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container text-right">
+    <h1 class="text-center">Blog</h1>
+    @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+    {
+        <div class="align-top">
+            <a asp-action="Create" class="btn btn-outline-success">Create New</a>
+        </div>
+    }
+</div>
+<hr />
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="card col-lg-4">
+            <div class="card-body align-items-center">
+                <h2 class="text-center">@Html.DisplayFor(modelItem => item.Title)</h2>
+                <h4 class=text-center>Created by: @Html.DisplayFor(modelItem => item.Author)</h4>
+                <h6 class="text-center">Created At: @Html.DisplayFor(modelItem => item.CreatedAt)</h6>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.ShortDescription)</p>
+                <div class="text-right">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Read more...</a>
+                    @if (ViewContext.HttpContext.User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Edit</a>;
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Delete</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
